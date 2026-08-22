@@ -1,16 +1,16 @@
 {
-  "name": "gvzdv-plugins",
+  "name": "gab3mioni-plugins",
   "owner": {
-    "name": "Mike Gvozdev",
-    "email": "mv.gvozdev@gmail.com",
-    "url": "https://github.com/gvzdv"
+    "name": "Gabriel Mioni",
+    "email": "gabriel@amoritta.com.br",
+    "url": "https://github.com/gab3mioni"
   },
-  "description": "Mike Gvozdev's Claude Code plugins.",
+  "description": "Plugins de Claude Code do Gabriel Mioni.",
   "plugins": [
     {
-      "name": "claudish-to-english",
+      "name": "claudish-to-brazilian-portuguese",
       "source": "./",
-      "description": "Shows a plain-English rewrite of each Claude Code assistant message, produced by a local LLM (ollama). Display-only.",
+      "description": "Faz o Claude Code escrever em português do Brasil direto e curto, sem os tiques do 'claudish'. Hook de instrução, sem LLM.",
       "category": "productivity"
     }
   ]
