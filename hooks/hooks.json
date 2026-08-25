@@ -1,24 +1,13 @@
 {
   "hooks": {
-    "MessageDisplay": [
+    "SessionStart": [
       {
+        "matcher": "startup|resume|clear|compact",
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/rewrite.sh",
-            "timeout": 60
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/rewrite-md.sh",
-            "timeout": 180
+            "command": "printf 'CLAUDISH → PT-BR ATIVO\\n\\n'; sed '1,/^---$/d' \"${CLAUDE_PLUGIN_ROOT}/skills/claudish-ptbr/SKILL.md\"",
+            "timeout": 10
           }
         ]
       }

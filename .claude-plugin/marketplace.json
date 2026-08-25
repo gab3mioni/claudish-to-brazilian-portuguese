@@ -10,7 +10,7 @@
     {
       "name": "claudish-to-brazilian-portuguese",
       "source": "./",
-      "description": "Faz o Claude Code escrever em português do Brasil direto e curto, sem os tiques do 'claudish'. Hook de instrução, sem LLM.",
+      "description": "Faz o Claude Code escrever em português do Brasil direto e curto, sem os tiques do 'claudish'. Skill + hook, sem LLM.",
       "category": "productivity"
     }
   ]

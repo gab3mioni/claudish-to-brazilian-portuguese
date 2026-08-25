@@ -1,6 +1,6 @@
 # claudish-to-brazilian-portuguese
 
-Um plugin de Claude Code que faz o Claude **escrever em português do Brasil
+Uma skill de Claude Code que faz o Claude **escrever em português do Brasil
 direto e curto**, sem os tiques do "claudish": travessão como muleta, frase de
 quarenta palavras, hedge, preâmbulo, jargão traduzido do inglês, adjetivo no
 lugar de número.
@@ -8,8 +8,9 @@ lugar de número.
 Não é tradução. É estilo. O Claude já escreve português quando você pede; o que
 ele não faz sozinho é escrever **como um dev brasileiro escreve**.
 
-Sem LLM local, sem ollama, sem API extra, sem dependência. O plugin é um arquivo
-de instrução e um hook que injeta ele no início de cada sessão.
+Sem LLM local, sem ollama, sem API extra, sem dependência. É um arquivo de
+instrução, uma skill que o Claude pode carregar sozinho e um hook que injeta o
+mesmo texto no início de cada sessão.
 
 > Fork de [gvzdv/claudish-to-english](https://github.com/gvzdv/claudish-to-english),
 > de Mike Gvozdev. A ideia é dele. O original reescreve a mensagem depois de
@@ -42,17 +43,19 @@ Funcionou se a sessão abrir com `CLAUDISH → PT-BR ATIVO`.
 
 ```
 sessão abre (startup, resume, clear ou compact)
-   └─► hook roda `cat ESTILO.md`
+   └─► hook faz cat no SKILL.md (sem o frontmatter)
          └─► o texto entra no contexto do Claude
                └─► ele escreve assim até o fim da sessão
 ```
 
-`hooks/hooks.json` registra um hook `SessionStart` que faz `cat` no `ESTILO.md`.
-O stdout de um hook `SessionStart` vira contexto. É o plugin inteiro.
+`hooks/hooks.json` registra um hook `SessionStart` que lê
+`skills/claudish-ptbr/SKILL.md`. O stdout de um hook `SessionStart` vira
+contexto. O matcher cobre `compact`, então a instrução volta depois de uma
+compactação — que é quando o estilo escorregaria de volta.
 
-O matcher cobre `startup|resume|clear|compact`, então a instrução volta depois de
-uma compactação de contexto — que é justamente quando o estilo escorregaria de
-volta.
+O mesmo arquivo é uma skill: dá para chamar `/claudish-ptbr` no meio da sessão
+para recarregar, e o Claude carrega sozinho quando a tarefa é de escrita. Um
+arquivo, dois caminhos de entrada.
 
 ## O que a instrução manda cortar
 
@@ -69,7 +72,7 @@ Vale para chat, `.md`, mensagem de commit, descrição de PR e comentário em
 português. Não vale para código, identificador, nome de API, chave de config nem
 saída de log.
 
-Leia o [`ESTILO.md`](./ESTILO.md) inteiro — é curto, e é o produto. Edite ele se
+Leia o [`SKILL.md`](./skills/claudish-ptbr/SKILL.md) inteiro — é curto, e é o produto. Edite ele se
 seu gosto for outro; é para isso que ele é um arquivo separado.
 
 ---
@@ -82,11 +85,11 @@ tem variável de ambiente: sem hook rodando, não sobra nada para desligar.
 ## Limite conhecido
 
 A instrução entra uma vez por sessão. Em sessão muito longa o estilo pode
-escorregar, como escorrega com qualquer instrução de sistema. O `ESTILO.md` tem
+escorregar, como escorrega com qualquer instrução de sistema. O `SKILL.md` tem
 uma cláusula de persistência para segurar isso, e o matcher de `compact` recarrega
-no ponto de maior risco. Se ainda assim escorregar no seu uso, o próximo passo é
-registrar o mesmo `cat` também em `UserPromptSubmit` — recarrega a cada turno, ao
-custo de repetir ~700 tokens por mensagem.
+no ponto de maior risco. Se ainda assim escorregar, chame `/claudish-ptbr` para
+reinjetar, ou registre o mesmo comando em `UserPromptSubmit` — recarrega a cada
+turno, ao custo de ~700 tokens por mensagem.
 
 ## Estrutura
 
@@ -96,8 +99,10 @@ claudish-to-brazilian-portuguese/
 │   ├── plugin.json         # manifesto do plugin
 │   └── marketplace.json    # para o repo ser adicionado como marketplace
 ├── hooks/
-│   └── hooks.json          # SessionStart -> cat ESTILO.md
-├── ESTILO.md               # a instrução (o produto)
+│   └── hooks.json          # SessionStart -> cat no SKILL.md
+├── skills/
+│   └── claudish-ptbr/
+│       └── SKILL.md        # a instrução (o produto)
 ├── LICENSE
 └── README.md
 ```

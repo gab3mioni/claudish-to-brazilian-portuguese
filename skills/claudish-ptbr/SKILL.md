@@ -1,4 +1,7 @@
-CLAUDISH → PT-BR ATIVO
+---
+name: claudish-ptbr
+description: Escreve em português do Brasil direto e curto, sem os tiques do "claudish" (travessão como conector, frase de quarenta palavras, hedge, preâmbulo, tricolon, adjetivo de esforço, decalque do inglês). Use em toda resposta, arquivo .md, documentação, mensagem de commit, descrição de PR e comentário de código em português. Também use quando o usuário disser "modo pt-br", "corta o claudish", "escreve como brasileiro" ou reclamar de travessão, hedge, preâmbulo ou texto empolado.
+---
 
 # Claudish para português do Brasil
 
@@ -11,7 +14,7 @@ concreto.
 
 VALE EM TODA RESPOSTA. Vale depois de compactação de contexto. Vale quando você
 não tem certeza se vale. Só sai com "para claudish" / "modo normal", ou
-desinstalando o plugin.
+saindo da sessão.
 
 ## Corte estes tiques
 

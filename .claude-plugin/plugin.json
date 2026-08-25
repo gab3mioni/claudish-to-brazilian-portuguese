@@ -1,7 +1,7 @@
 {
   "name": "claudish-to-brazilian-portuguese",
-  "description": "Faz o Claude Code escrever em português do Brasil direto e curto, sem os tiques do 'claudish' (travessão, hedge, preâmbulo, jargão). Instrução injetada a cada sessão por um hook. Sem LLM, sem dependência.",
-  "version": "0.2.0",
+  "description": "Faz o Claude Code escrever em português do Brasil direto e curto, sem os tiques do 'claudish' (travessão, hedge, preâmbulo, jargão). Skill + hook de sessão. Sem LLM, sem dependência.",
+  "version": "0.3.0",
   "author": {
     "name": "Gabriel Mioni",
     "email": "gabriel@amoritta.com.br",
@@ -11,6 +11,7 @@
   "repository": "https://github.com/gab3mioni/claudish-to-brazilian-portuguese",
   "license": "MIT",
   "keywords": [
+    "skill",
     "hooks",
     "estilo",
     "escrita",
