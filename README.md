@@ -1,6 +1,6 @@
 # claudish-to-brazilian-portuguese
 
-Uma skill de Claude Code que faz o Claude **escrever em português do Brasil
+Um plugin de Claude Code que faz o Claude **escrever em português do Brasil
 direto e curto**, sem os tiques do "claudish": travessão como muleta, frase de
 quarenta palavras, hedge, preâmbulo, jargão traduzido do inglês, adjetivo no
 lugar de número.
@@ -51,7 +51,7 @@ sessão abre (startup, resume, clear ou compact)
 `hooks/hooks.json` registra um hook `SessionStart` que lê
 `skills/claudish-ptbr/SKILL.md`. O stdout de um hook `SessionStart` vira
 contexto. O matcher cobre `compact`, então a instrução volta depois de uma
-compactação — que é quando o estilo escorregaria de volta.
+compactação. É aí que o estilo escorregaria de volta.
 
 O mesmo arquivo é uma skill: dá para chamar `/claudish-ptbr` no meio da sessão
 para recarregar, e o Claude carrega sozinho quando a tarefa é de escrita. Um
@@ -72,8 +72,9 @@ Vale para chat, `.md`, mensagem de commit, descrição de PR e comentário em
 português. Não vale para código, identificador, nome de API, chave de config nem
 saída de log.
 
-Leia o [`SKILL.md`](./skills/claudish-ptbr/SKILL.md) inteiro — é curto, e é o produto. Edite ele se
-seu gosto for outro; é para isso que ele é um arquivo separado.
+Leia o [`SKILL.md`](./skills/claudish-ptbr/SKILL.md) inteiro. É curto, e é o
+produto. Edite ele se seu gosto for outro. É para isso que ele é um arquivo
+separado.
 
 ---
 
@@ -88,7 +89,7 @@ A instrução entra uma vez por sessão. Em sessão muito longa o estilo pode
 escorregar, como escorrega com qualquer instrução de sistema. O `SKILL.md` tem
 uma cláusula de persistência para segurar isso, e o matcher de `compact` recarrega
 no ponto de maior risco. Se ainda assim escorregar, chame `/claudish-ptbr` para
-reinjetar, ou registre o mesmo comando em `UserPromptSubmit` — recarrega a cada
+reinjetar. Ou registre o mesmo comando em `UserPromptSubmit`: recarrega a cada
 turno, ao custo de ~700 tokens por mensagem.
 
 ## Estrutura
@@ -109,5 +110,5 @@ claudish-to-brazilian-portuguese/
 
 ## Licença
 
-MIT — veja [LICENSE](./LICENSE). Trabalho derivado de
+MIT, veja [LICENSE](./LICENSE). Trabalho derivado de
 [gvzdv/claudish-to-english](https://github.com/gvzdv/claudish-to-english).
