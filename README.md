@@ -5,13 +5,6 @@ direto e curto**, sem os tiques do "claudish": travessão como muleta, frase de
 quarenta palavras, hedge, preâmbulo, jargão traduzido do inglês, adjetivo no
 lugar de número.
 
-Não é tradução. É estilo. O Claude já escreve português quando você pede; o que
-ele não faz sozinho é escrever **como um dev brasileiro escreve**.
-
-Sem LLM local, sem ollama, sem API extra, sem dependência. É um arquivo de
-instrução, uma skill que o Claude pode carregar sozinho e um hook que injeta o
-mesmo texto no início de cada sessão.
-
 > Fork de [gvzdv/claudish-to-english](https://github.com/gvzdv/claudish-to-english),
 > de Mike Gvozdev. A ideia é dele. O original reescreve a mensagem depois de
 > pronta, com um LLM local; aqui a instrução vem antes, e quem escreve é o
@@ -51,7 +44,7 @@ sessão abre (startup, resume, clear ou compact)
 `hooks/hooks.json` registra um hook `SessionStart` que lê
 `skills/claudish-ptbr/SKILL.md`. O stdout de um hook `SessionStart` vira
 contexto. O matcher cobre `compact`, então a instrução volta depois de uma
-compactação. É aí que o estilo escorregaria de volta.
+compactação.
 
 O mesmo arquivo é uma skill: dá para chamar `/claudish-ptbr` no meio da sessão
 para recarregar, e o Claude carrega sozinho quando a tarefa é de escrita. Um
@@ -68,14 +61,6 @@ E o que manda fazer: uma ideia por frase, voz ativa, número e `arquivo:linha` n
 lugar de adjetivo, resposta primeiro, termo técnico que ninguém traduz mantido em
 inglês (commit, build, deploy, branch, log).
 
-Vale para chat, `.md`, mensagem de commit, descrição de PR e comentário em
-português. Não vale para código, identificador, nome de API, chave de config nem
-saída de log.
-
-Leia o [`SKILL.md`](./skills/claudish-ptbr/SKILL.md) inteiro. É curto, e é o
-produto. Edite ele se seu gosto for outro. É para isso que ele é um arquivo
-separado.
-
 ---
 
 ## Desligar
@@ -86,8 +71,9 @@ tem variável de ambiente: sem hook rodando, não sobra nada para desligar.
 ## Limite conhecido
 
 A instrução entra uma vez por sessão. Em sessão muito longa o estilo pode
-escorregar, como escorrega com qualquer instrução de sistema. O `SKILL.md` tem
-uma cláusula de persistência para segurar isso, e o matcher de `compact` recarrega
+escorregar, como escorrega com qualquer instrução de sistema. 
+
+O `SKILL.md` tem uma cláusula de persistência para segurar isso, e o matcher de `compact` recarrega
 no ponto de maior risco. Se ainda assim escorregar, chame `/claudish-ptbr` para
 reinjetar. Ou registre o mesmo comando em `UserPromptSubmit`: recarrega a cada
 turno, ao custo de ~700 tokens por mensagem.
